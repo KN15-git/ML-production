@@ -1,0 +1,17 @@
+# Simple, beginner-friendly Dockerfile for the workshop API
+FROM python:3.11-slim
+
+WORKDIR /app
+
+# Install dependencies first (better layer caching)
+COPY requirements.txt .
+RUN pip install --no-cache-dir -r requirements.txt
+
+# Copy application code + trained model
+COPY main.py .
+COPY model.pkl .
+
+EXPOSE 8000
+
+# Render provides the PORT env variable; fall back to 8000 for local use
+CMD ["sh", "-c", "uvicorn main:app --host 0.0.0.0 --port ${PORT:-8000}"]
