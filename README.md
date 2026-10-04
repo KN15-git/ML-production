@@ -72,6 +72,23 @@ Application logs from the live Render service after the three test requests abov
 
 ![Render application logs](screenshots/render-logs.png)
 
+## What the model predicts
+
+The model is a Random Forest classifier trained on the Iris dataset. Given four
+flower measurements (in cm), it predicts which of three Iris species the flower
+is: `setosa` (0), `versicolor` (1) or `virginica` (2).
+
+## Example request body for `/predict`
+
+```json
+{
+  "features": [5.1, 3.5, 1.4, 0.2]
+}
+```
+
+Order of values: `[sepal_length, sepal_width, petal_length, petal_width]`.
+`features` must contain exactly 4 numbers.
+
 ## Run locally
 
 ```bash
